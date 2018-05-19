@@ -12,9 +12,9 @@ import org.jsoup.select.Elements;
 
 
 @Component
-public class WebContent {
+public class HiMModel {
 	
-	public  ArrayList<String> Content(String adress, String size, String length) throws IOException{
+	public  ArrayList<String> Content(String size, String length) throws IOException{
 		String adres = "http://www2.hm.com/pl_pl/ona/produkty/spodnice.html?";
 		
 		//case for Length
@@ -41,7 +41,7 @@ public class WebContent {
 		System.out.println(adres);
 		
 		Document document = Jsoup.connect(adres).get();
-		Elements titles = document.getElementsByClass("product-item-image");
+		Elements pictures = document.getElementsByClass("product-item-image");
 		Elements prices = document.select("div.ng-hide");
 		
 		
@@ -49,9 +49,9 @@ public class WebContent {
 		 ArrayList<String> skirtList = new ArrayList<String>(0);
 		
 		int countter=0;
-        for (Element title : titles) {
+        for (Element picture : pictures) {
                 countter++;
-            	skirtList.add(title.attr("src"));
+            	skirtList.add(picture.attr("src"));
       //      	System.out.println(countter + " Photo: " + title.attr("src"));
             
         }

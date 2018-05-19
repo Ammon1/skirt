@@ -19,7 +19,9 @@ public class HomeController {
 	@Autowired
 	WebData theWeb; 
 	@Autowired
-	WebContent theContent; 
+	HiMModel theHiMModel; 
+	@Autowired
+	MariezelieModel theMariezelieModel;
 
 	//@RequestMapping(value="/")
 	//public ModelAndView test(HttpServletResponse response) throws IOException{
@@ -32,13 +34,22 @@ public class HomeController {
 		theModel.addAttribute("web", theWeb);
 		initModelListSize(theModel);
 		initModelListLength(theModel);
+		initModelListShop(theModel);
 		
 		return "home";
 	}
 	@RequestMapping("/processForm")
 	public ModelAndView processForm(@ModelAttribute("web") WebData theWeb) throws IOException {
-
-		ArrayList<String> skirtList = theContent.Content( theWeb.getAdres(),theWeb.getSize(),theWeb.getLength());
+		ArrayList<String> skirtList = new ArrayList<String>();
+		
+		System.out.println(theWeb.getShop());
+		if(theWeb.getShop().equals("H i M")){
+			skirtList = theHiMModel.Content(theWeb.getSize(),theWeb.getLength());
+			}
+		if(theWeb.getShop().equals("mariezelie")){
+			skirtList = theMariezelieModel.Content(theWeb.getSize(),theWeb.getLength());
+			}
+		
 		LinkedList<String> prices = new LinkedList<String>();
 		LinkedList<String> links = new LinkedList<String>();
 		int iend;
@@ -72,5 +83,11 @@ public class HomeController {
          theLength.add("midi"); 
          theLength.add("maxi"); 
          theModel.addAttribute("length", theLength);
+     }
+	 private void initModelListShop(Model theModel) {
+         List<String> theShop = new ArrayList<String>();
+         theShop.add("H i M");		 
+         theShop.add("mariezelie"); 
+         theModel.addAttribute("shop", theShop);
      }
 }

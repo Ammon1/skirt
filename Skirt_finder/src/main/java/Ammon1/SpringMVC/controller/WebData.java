@@ -8,7 +8,18 @@ public class WebData {
 	private String adres;
 	private String length;
 	private String size;
+	private String shop;
 	
+	public String getShop() {
+		return shop;
+	}
+
+
+	public void setShop(String shop) {
+		this.shop = shop;
+	}
+
+
 	public String getLength() {
 		return length;
 	}
@@ -46,8 +57,9 @@ public class WebData {
 
 	@Override
 	public String toString() {
-		return "WebData [adres=" + adres + ", legth=" + length + ", size=" + size + "]";
+		return "WebData [adres=" + adres + ", length=" + length + ", size=" + size + ", shop=" + shop + "]";
 	}
+
 
 	
 
